@@ -1,0 +1,22 @@
+#!/bin/sh
+
+#创建大小为1M的文件file.in
+
+if [ -f file.in ]
+then
+	echo file.in exist
+	rm -f file.in
+fi
+
+
+echo creat file.in
+touch file.in
+
+size=$(du -k ./file.in|awk '{print $1}')
+while [ $size -lt 1024 ]
+do
+	echo 11111111 >> file.in
+	size=$(du -k ./file.in|awk '{print $1}')
+done
+
+echo end-------------

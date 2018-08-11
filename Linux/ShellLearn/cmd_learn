@@ -1,0 +1,67 @@
+#!/bin/sh
+
+echo "create test1 dir"
+mkdir  test1
+
+if [ -d test1 ] 
+then 
+	echo "test1 dir exist"
+else
+	echo "test1 dir create failed"
+fi
+
+echo " create filetest"
+touch filetest
+
+if [ -f filetest ]
+then 
+	echo "filetest exist"
+else
+	echo "filetest create failed"
+fi 
+
+echo "delete test1 fieltest"
+
+rm -rf  test1 filetest
+
+if [ -d test1 ] || [ -f filetest ]
+then 
+	echo "rm failed"
+else
+	echo "rm success"
+fi
+
+#learn shitf cmd
+echo "Use shift to change param vars"
+while [ "$1" != "" ]
+do
+	echo "$1"
+	shift
+done
+
+#learn trap 用于在接收到信号将要采取的行动
+trap 'rm -f /tmp/my_tmp_file_$$' INT
+echo creating file /tmp/my_tmp_file_$$
+date > /tmp/my_tmp_file_$$
+
+echo "press interrupt [Ctrl + C ] to interrupt...."
+while [ -f /tmp/my_tmp_file_$$ ]
+do
+	echo File exists
+	sleep 1
+done
+echo The file no longer exists
+
+trap INT
+echo creating file /tmp/mytmp_file_$$
+date > /tmp/my_tmp_file_$$
+
+echo "press interrupt [Ctrl + C ] to interrupt...."
+while [ -f /tmp/my_tmp_file_$$ ]
+do
+	echo File exists
+	sleep 1
+done
+
+echo we never get here
+exit 0

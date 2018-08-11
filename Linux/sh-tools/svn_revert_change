@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# 将svn目录下的修改内容revert, 脚本参数为有效目录
+if test -d $*
+then
+    echo "Run svn revert under $*"
+    svn st $* | grep "^[M\!]" | awk '
+    {
+        print  $2
+    }
+    '|xargs svn revert
+else
+    echo "input correct dir"
+fi

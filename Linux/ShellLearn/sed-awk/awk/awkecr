@@ -1,0 +1,10 @@
+#测试行是整数, 字符串,还是空行
+/[0-9]+/ {print "That is an interger"}
+/[A-Za-z]+/ {print "This is a string"}
+/^$/ {print "This a blank line"}
+/^$/{ 
+++x #统计空行数
+} 
+END{ 
+  print x 
+}

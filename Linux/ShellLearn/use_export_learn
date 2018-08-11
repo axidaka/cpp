@@ -1,0 +1,7 @@
+#!/bin/sh
+
+#使用其他shell或者脚本export 的变量。调用方式可在 其他脚本中调用 或者
+#shell中export， 直接执行该脚本
+
+echo "$foo"
+echo "$bar"

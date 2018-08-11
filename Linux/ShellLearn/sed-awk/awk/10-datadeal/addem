@@ -1,0 +1,9 @@
+awk '
+# 输入文件为orders 计算数量*单价得到总价
+/^#/{
+    amount = $2 * $3
+    printf "%s %6.2f\n", $0, amount
+    next
+}
+{   print }
+' $*

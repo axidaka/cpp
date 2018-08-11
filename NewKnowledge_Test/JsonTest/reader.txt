@@ -1,0 +1,23 @@
+{	
+   "avatarData" : {	
+      "belt_av" : "默认腰带[暗帝]",	
+      "cap_av" : "默认帽子[暗帝]",	
+      "coat_av" : "默认上衣[暗帝]",	
+      "face_av" : "默认面部[暗帝]",	
+      "hair_av" : "默认头发[暗帝]",	
+      "neck_av" : "默认胸部[暗帝]",	
+      "pants_av" : "默认裤子[暗帝]",	
+      "shoes_av" : "默认鞋子[暗帝]",	
+      "skin_av" : "默认皮肤[暗帝]",	
+      "weapon_av" : "女鬼剑士初始武器"	
+   },	
+   "mainData" : {	
+      "bigProfession" : "女鬼剑",	
+      "currentLv" : "50",	
+      "occupationName" : "暗帝",	
+      "roleName" : "暗殿骑士女鬼",	
+      "serverArea" : "湖南4区"	
+   },	
+   "uid" : "50013717",	
+   "verify" : "2e011e3278303166afdff73b7c5e6565"	
+}

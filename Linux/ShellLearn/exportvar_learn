@@ -1,0 +1,6 @@
+#!/bin/sh
+
+foo="The first meta-syn variable"
+export bar="The second meta-syn variable"
+
+./use_export_learn

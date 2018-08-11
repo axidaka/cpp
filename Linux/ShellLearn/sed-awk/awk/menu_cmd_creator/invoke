@@ -1,0 +1,52 @@
+awk -v CMDFILE="uucp_commands" '
+#调用 -- 基于菜单的命令生成器
+
+# CMDFILE中第一行是菜单标题
+# 后面的行包括:$1-描述 $2 要执行的命令
+# 命令行参数无法在BEGIN中使用, 所以需要使用 -v 选项
+
+BEGIN{
+    FS=":"
+    # 处理CMDFILE 将项目输入菜单数据
+    while (getline < CMDFILE > 0){
+        # 读取标题
+        if (!title){
+            title = $1
+            continue
+        }
+
+        # 读取命令描述和命令
+        ++ sizeofArray
+        menu[sizeofArray] = $1
+        command[sizeofArray] = $2
+    }
+
+    # 显示菜单
+    display_menu()
+}
+
+# 处理用户对提示的响应
+{
+    # 测试用户响应的值
+    if ($1 > 0 && $1 <= sizeofArray){
+        printf("Executing ... %s\n", command[$1])
+        system(command[$1]);
+        printf("<Press RETURN to continue>")
+        getline
+    }
+    else
+        exit
+    
+    display_menu()
+}
+
+function display_menu(){
+    system("clear")
+    print "\t" title
+    for (i = 1; i <= sizeofArray; ++i)
+        printf("\t%d. %s\n", i, menu[i])
+    printf("\t%d.Exit\n", i)
+
+    print "choose one:"
+}' -
+

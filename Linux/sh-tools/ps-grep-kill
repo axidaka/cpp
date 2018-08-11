@@ -1,0 +1,24 @@
+#!/bin/sh
+
+# ps -ef | grep $*  to find the pid which to kill
+
+if [ $# != 1 ]
+then
+    echo "param count: " $#
+    echo "input the procesname you want to kill"
+    exit 0
+else
+    pname=$1
+    echo "you want to kill " $pname
+fi
+
+shellfiledir=$(cd `dirname $0`; pwd)
+awkfilepath=$shellfiledir"/ps-grep-kill.awk"
+
+#tmpfile=$(mktemp /tmp/tmp.XXXXXX)
+tmpfile=~/tmp.XXXXXX
+ps -ef | grep -i $* | grep -v grep > $tmpfile
+
+awk -v INPUTFILE=$tmpfile -v PNAME=$pname -f $awkfilepath -
+
+rm -f $tmpfile

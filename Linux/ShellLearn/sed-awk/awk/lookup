@@ -1,0 +1,30 @@
+awk '# lookup -- read local glossary file and prompts user for query
+
+BEGIN {
+    FS = "\t"; OFS="\t"
+    # 提示用户输入
+    printf("Enter a glossary term: ")
+}
+# read local file named glossary
+FILENAME == "glossary"{
+    #load each glossary entey into an array
+    entry[$1] = $2
+    next
+}
+
+#scan for command to exit program
+$0  ~ /^(quit|[Qq]|exit|[Xx])$/ {exit}
+
+#proces any non-empty line
+$0 != ""{
+    if ($0 in entry)
+        print entry[$0]
+    else
+        print $0 "not found"
+}
+
+{
+    printf("Enter another glossary tem(q to quit):")
+}
+
+' glossary -

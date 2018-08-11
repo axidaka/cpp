@@ -1,0 +1,23 @@
+#!/bin/sh 
+ls -Rl $* | awk '
+BEGIN{ print "Size", "\t", "File" }
+
+# 只过滤9个字段, 且以-开头的行信息
+NF == 9 && /^-/{
+     sum += $5
+     ++ filenum
+    print $5, "\t", $9
+ }                                           
+ 
+# 只过滤9个字段, 且是目录d
+NF == 9 && /^d/ {
+    print "<dir>", "\t", $9 
+}
+
+# ls -Rl 结果会输出即将要打印的目录名称 匹配是 .或者 / 开头, 这里注意在方括号中/ 需要加转义字符\
+NF == 1 && /^[\.\/].*:$/{
+    print "\t", $0
+}
+ END{ print "Total:", sum, "bytes" "(" filenum "files)" }
+                    
+' 

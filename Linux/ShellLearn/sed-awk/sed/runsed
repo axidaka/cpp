@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# 命令行参数传入要修改的文件
+for x
+do
+    echo "editing $x: \c"
+    if test "$x" = sedscr
+    then
+        echo 'not eding sedscript!'
+    elif test -s $x #文件大小不为空
+    then
+        sed -f sedscr $x > /tmp/$x$$
+    
+        if test -s /tmp/$x$$
+        then 
+            if cmp -s $x /tmp/$x$$
+            then
+                echo 'file not changed: \c'
+            else
+                mv $x $x.bak   # backup original
+                cp /tmp/$x$$ $x
+                echo /tmp/$x$$
+            fi
+        else
+            echo 'sed produced an empty file\c'
+            echo '-check your sedscript'
+        fi
+    
+         rm -f /tmp/$x$$
+    else
+        echo 'original file empty'
+    fi
+done
+
+echo 'all done'

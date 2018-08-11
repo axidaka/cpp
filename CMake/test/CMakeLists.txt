@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 2.8)
+PROJECT(cmake_test)
+SET(SRC_LIST hello.c)
+INCLUDE_DIRECTORIES(/usr/include/glib)
+ADD_EXECUTABLE(hello ${SRC_LIST})

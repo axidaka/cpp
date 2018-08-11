@@ -1,0 +1,39 @@
+#使用函数库， 将多个*.o文件放入*.a文件。
+
+all: myapp
+
+#install idr
+INSTDIR = ./install
+
+#which compiler
+CC = gcc
+
+#where are include files kept
+INCLUDE = .
+
+#optinos for development make已经有CFLAGS作为内置规则， makefile文件声明可以覆盖
+CFLAGS = -g -Wall -ansi
+
+#options for release
+#CFLAGS = -O -Wall -ansi
+
+#Local Libraries
+MYLIB = mylib.a
+
+myapp: main.o ${MYLIB} 
+	${CC} -o myapp main.o ${MYLIB}
+
+${MYLIB}: ${MYLIB}(2.o) ${MYLIB}(3.o)
+
+main.o: main.c a.h 
+#	${CC} -I${INCLUDE} ${CFLAGS} -c main.c
+
+2.o: 2.c a.h b.h
+#	${CC} -I${INCLUDE} ${CFLAGS} -c 2.c
+
+3.o: 3.c b.h c.h
+#	${CC} -I${INCLUDE} ${CFLAGS} -c 3.c
+
+clean:
+	-rm main.o 2.o 3.o ${MYLIB}
+	echo "run clean"

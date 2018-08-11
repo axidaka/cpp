@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# test if $* is dir
+if test -d $*
+then 
+    echo "Run under $*"
+    svn st $* | grep "^?" | awk '{print $2}' | xargs rm -rf
+else
+    echo "input correct dir"
+fi

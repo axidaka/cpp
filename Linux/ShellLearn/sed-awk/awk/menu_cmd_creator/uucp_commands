@@ -1,0 +1,4 @@
+UUCP Status Menu
+Who am i:who am i
+Look at files under current dir:ls -alR
+Print current dir:pwd

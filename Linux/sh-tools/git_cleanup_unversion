@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# 将 git下不需要的文件删除
+if test -d $*
+then
+    echo "Run under $*"
+    # 使用git status 筛选出不需要纳入版本控制的文件
+    git status $* | awk 'NF == 1 && -bash ~ /^\s+.*/ {print -bash}' | xargs rm -rf
+else
+    echo "input correct dir"
+fi

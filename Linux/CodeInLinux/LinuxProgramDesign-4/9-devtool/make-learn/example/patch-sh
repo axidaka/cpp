@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# 打包脚本 
+
+tar cvf myapp-1.0.tar main.c 2.c 3.c *.h myapp Makefile4
+
+if [ -f myapp-1.0.tar ]
+	then
+	echo "myapp-1.0.tar exist"
+else
+	echo "tar failed"
+fi
+
+echo "ls -l *.tar"
+ls -l *.tar
+
+
+gzip myapp-1.0.tar
+echo "ls -l *.gz"
+ls -l *.gz
+
+mv myapp-1.0.tar.gz myapp-1.0.tgz

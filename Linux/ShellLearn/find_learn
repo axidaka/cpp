@@ -1,0 +1,18 @@
+#!/bin/sh
+
+#学习find指令
+#find用法 find [path] [options] [tests] [actions]
+
+echo find older files than find_learn
+find . -not -newer find_learn -type f -print
+
+echo -----------------------------------------------------------
+echo "find f*_learn files" 
+find . -name "f*_learn" -type f -print
+
+#对于条件可以通过 -not -and -or 进行组合
+
+echo -----------------------------------------------------------
+echo "find f*_learn files" 
+echo "find newer than var_lean and exec cmd ls"
+find . -newer var_learn -type f -exec ls -l {} \;

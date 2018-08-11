@@ -1,0 +1,33 @@
+#!/bin/sh
+
+myvar="Hi there"
+
+echo $myvar
+echo "$myvar"
+echo '$myvar'
+echo \$myvar
+
+echo Enter some text
+read myvar
+
+echo '$myvar' now equals $myvar
+
+echo "环境变量输出"
+
+echo HOME: $HOME
+echo PATH: $PATH
+echo PS1:  $PS1
+echo PS2:  $PS2
+echo IFS:  $IFS
+echo 0:    $0
+echo "#:   $#"
+echo $:    $$
+echo params: $*
+
+echo "The Pragram $0 is running"
+echo "The second param was $2"
+echo "The param list was $*"
+echo "The script is now complete"
+
+
+exit 0
